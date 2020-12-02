@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">FilmicPro</string>
+    <string name="disclaimer">Постеры представлены: https://www.movieposters.com/</string>
+    <string name="button">Жмяк</string>
+
+
 </resources>
