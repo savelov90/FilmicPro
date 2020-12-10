@@ -13,5 +13,7 @@
     <string name="menu_watch_later_title">Смотреть позже</string>
     <string name="menu_selections_title">Коллекции</string>
 
+    <string name="page_title">Поиск фильмов</string>
+
 
 </resources>
