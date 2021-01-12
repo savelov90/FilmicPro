@@ -1,6 +1,7 @@
 package com.savelov.filmicpro
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +17,19 @@ class MainActivity : AppCompatActivity() {
 
         main_recycler.apply {
             filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
-                override fun click(film: Film) {}
+                override fun click(film: Film) {
+                    //Создаем бандл и кладем туда объект с данными фильма
+                    val bundle = Bundle()
+                    //Первым параметром указывается ключ, по которому потом будем искать, вторым сам
+                    //передаваемый объект
+                    bundle.putParcelable("film", film)
+                    //Запускаем наше активити
+                    val intent = Intent(this@MainActivity, DetailsActivity::class.java)
+                    //Прикрепляем бандл к интенту
+                    intent.putExtras(bundle)
+                    //Запускаем активити через интент
+                    startActivity(intent)
+                }
             })
             adapter = filmsAdapter
             layoutManager = LinearLayoutManager(this@MainActivity)
