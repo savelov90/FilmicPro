@@ -1,21 +1,20 @@
 package com.savelov.filmicpro
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_home.*
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         initNavigation()
 
-        //Запускаем фрагмент при старте
+        //Зупускаем фрагмент при старте
         supportFragmentManager
             .beginTransaction()
             .add(R.id.fragment_placeholder, HomeFragment())
@@ -23,7 +22,6 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
     }
-
 
     fun launchDetailsFragment(film: Film) {
         //Создаем "посылку"
@@ -37,29 +35,23 @@ class MainActivity : AppCompatActivity() {
 
         //Запускаем фрагмент
         supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragment_placeholder, fragment)
-                .addToBackStack(null)
-                .commit()
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
-    fun initNavigation() {
-
-        topAppBar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.settings -> {
-                    Toast.makeText(this, "Настройки", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                else -> false
-            }
-        }
+    private fun initNavigation() {
 
         bottom_navigation.setOnNavigationItemSelectedListener {
 
             when (it.itemId) {
                 R.id.favorites -> {
-                    Toast.makeText(this, "Избранное", Toast.LENGTH_SHORT).show()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragment_placeholder, FavoritesFragment())
+                        .addToBackStack(null)
+                        .commit()
                     true
                 }
                 R.id.watch_later -> {
@@ -74,28 +66,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
-
-
-
-/*    fun initMenuButtons() {
-        button_favorite.setOnClickListener {
-            Toast.makeText(this, "Избранное", Toast.LENGTH_SHORT).show()
-        }
-        button_russian.setOnClickListener {
-            Toast.makeText(this, "Российское кино", Toast.LENGTH_SHORT).show()
-        }
-        button_top.setOnClickListener {
-            Toast.makeText(this, "Топ250", Toast.LENGTH_SHORT).show()
-        }
-        button_menu.setOnClickListener {
-            Toast.makeText(this, "Меню", Toast.LENGTH_SHORT).show()
-        }
-        button_settings.setOnClickListener {
-            Toast.makeText(this, "Настройки", Toast.LENGTH_SHORT).show()
-        }
-    }*/
-
-
 }
