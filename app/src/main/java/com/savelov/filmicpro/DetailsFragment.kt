@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_details.*
 
+
 class DetailsFragment : Fragment() {
     private lateinit var film: Film
 
