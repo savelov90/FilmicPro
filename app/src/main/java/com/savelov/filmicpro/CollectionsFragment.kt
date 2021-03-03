@@ -5,20 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.savelov.filmicpro.databinding.FragmentCollectionsBinding
 import kotlinx.android.synthetic.main.fragment_collections.*
 
 class CollectionsFragment : Fragment() {
+    private lateinit var binding: FragmentCollectionsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_collections, container, false)
+        binding = FragmentCollectionsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        AnimationHelper.performFragmentCircularRevealAnimation(collections_fragment_root, requireActivity(), 4)
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.collectionsFragmentRoot, requireActivity(), 4)
     }
 }
