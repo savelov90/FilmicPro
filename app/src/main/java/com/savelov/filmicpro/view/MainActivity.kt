@@ -1,12 +1,13 @@
-package com.savelov.filmicpro
+package com.savelov.filmicpro.view
 
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.savelov.filmicpro.R
 import com.savelov.filmicpro.databinding.ActivityMainBinding
-import kotlinx.android.synthetic.main.activity_main.*
+import com.savelov.filmicpro.domain.Film
+import com.savelov.filmicpro.view.fragments.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -56,25 +57,25 @@ class MainActivity : AppCompatActivity() {
                     val fragment = checkFragmentExistence(tag)
                     //В первом параметре, если фрагмент не найден и метод вернул null, то с помощью
                     //элвиса мы вызываем создание нвого фрагмента
-                    changeFragment( fragment?: HomeFragment(), tag)
+                    changeFragment(fragment ?: HomeFragment(), tag)
                     true
                 }
                 R.id.favorites -> {
                     val tag = "favorites"
                     val fragment = checkFragmentExistence(tag)
-                    changeFragment( fragment?: FavoritesFragment(), tag)
+                    changeFragment(fragment ?: FavoritesFragment(), tag)
                     true
                 }
                 R.id.watch_later -> {
                     val tag = "watch_later"
                     val fragment = checkFragmentExistence(tag)
-                    changeFragment( fragment?: LaterFragment(), tag)
+                    changeFragment(fragment ?: LaterFragment(), tag)
                     true
                 }
                 R.id.selections -> {
                     val tag = "selections"
                     val fragment = checkFragmentExistence(tag)
-                    changeFragment( fragment?: CollectionsFragment(), tag)
+                    changeFragment(fragment ?: CollectionsFragment(), tag)
                     true
                 }
                 else -> false
@@ -83,7 +84,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Ищем фрагмент по тэгу, если он есть то возвращаем его, если нет - то null
-    private fun checkFragmentExistence(tag: String): Fragment? = supportFragmentManager.findFragmentByTag(tag)
+    private fun checkFragmentExistence(tag: String): Fragment? =
+        supportFragmentManager.findFragmentByTag(tag)
 
     private fun changeFragment(fragment: Fragment, tag: String) {
         supportFragmentManager

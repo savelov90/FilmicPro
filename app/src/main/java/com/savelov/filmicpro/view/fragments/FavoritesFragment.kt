@@ -1,4 +1,4 @@
-package com.savelov.filmicpro
+package com.savelov.filmicpro.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,8 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.savelov.filmicpro.view.rv_adapters.FilmListRecyclerAdapter
+import com.savelov.filmicpro.view.MainActivity
+import com.savelov.filmicpro.view.rv_adapters.TopSpacingItemDecoration
 import com.savelov.filmicpro.databinding.FragmentFavoritesBinding
-import kotlinx.android.synthetic.main.fragment_favorites.*
+import com.savelov.filmicpro.domain.Film
+import com.savelov.filmicpro.utils.AnimationHelper
 
 
 class FavoritesFragment : Fragment() {
@@ -30,7 +34,7 @@ class FavoritesFragment : Fragment() {
         AnimationHelper.performFragmentCircularRevealAnimation(binding.favoritesFragmentRoot, requireActivity(), 2)
 
         binding.favoritesRecycler.apply {
-            filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
+            filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
                 override fun click(film: Film) {
                     (requireActivity() as MainActivity).launchDetailsFragment(film)
                 }

@@ -1,4 +1,4 @@
-package com.savelov.filmicpro
+package com.savelov.filmicpro.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.savelov.filmicpro.databinding.FragmentCollectionsBinding
-import kotlinx.android.synthetic.main.fragment_collections.*
+import com.savelov.filmicpro.utils.AnimationHelper
 
 class CollectionsFragment : Fragment() {
     private lateinit var binding: FragmentCollectionsBinding

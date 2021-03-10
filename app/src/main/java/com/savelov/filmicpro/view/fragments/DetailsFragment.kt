@@ -1,4 +1,4 @@
-package com.savelov.filmicpro
+package com.savelov.filmicpro.view.fragments
 
 
 import android.content.Intent
@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.savelov.filmicpro.R
 import com.savelov.filmicpro.databinding.FragmentDetailsBinding
+import com.savelov.filmicpro.domain.Film
 import kotlinx.android.synthetic.main.fragment_details.*
 
 

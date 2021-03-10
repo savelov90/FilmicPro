@@ -1,9 +1,10 @@
-package com.savelov.filmicpro
+package com.savelov.filmicpro.view.customviews
 
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import com.savelov.filmicpro.R
 
 class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null) : View(context, attributeSet) {
 

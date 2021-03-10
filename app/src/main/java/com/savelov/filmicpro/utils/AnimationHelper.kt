@@ -1,4 +1,4 @@
-package com.savelov.filmicpro
+package com.savelov.filmicpro.utils
 
 import android.app.Activity
 import android.view.View

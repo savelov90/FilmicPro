@@ -1,4 +1,4 @@
-package com.savelov.filmicpro
+package com.savelov.filmicpro.domain
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
