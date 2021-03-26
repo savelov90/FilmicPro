@@ -1,6 +1,7 @@
-package com.savelov.filmicpro.utils
+package com.savelov.filmicpro.data.API
 
-import android.telecom.Call
+import com.savelov.filmicpro.data.Entity.TmdbResultsDto
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -10,5 +11,5 @@ interface TmdbApi {
         @Query("api_key") apiKey: String,
         @Query("language") language: String,
         @Query("page") page: Int
-    ): Call<TmdbResults>
+    ): Call<TmdbResultsDto>
 }

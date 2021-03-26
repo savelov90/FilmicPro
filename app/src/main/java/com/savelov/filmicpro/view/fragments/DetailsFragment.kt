@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.savelov.filmicpro.R
+import com.savelov.filmicpro.data.API.ApiConstants
 import com.savelov.filmicpro.databinding.FragmentDetailsBinding
 import com.savelov.filmicpro.domain.Film
 import kotlinx.android.synthetic.main.fragment_details.*
@@ -64,7 +66,10 @@ class DetailsFragment : Fragment() {
         //Устанавливаем заголовок
         binding.detailsToolbar.title = film.title
         //Устанавливаем картинку
-        binding.detailsPoster.setImageResource(film.poster)
+        Glide.with(this)
+            .load(ApiConstants.IMAGES_URL + "w780" + film.poster)
+            .centerCrop()
+            .into(binding.detailsPoster)
         //Устанавливаем описание
         binding.detailsDescription.text = film.description
 
