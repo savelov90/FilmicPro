@@ -5,11 +5,13 @@ import androidx.lifecycle.ViewModel
 import com.savelov.filmicpro.App
 import com.savelov.filmicpro.domain.Film
 import com.savelov.filmicpro.domain.Interactor
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-class HomeFragmentViewModel : ViewModel() {
-
-    val filmsListLiveData = MutableLiveData<List<Film>>()
-    private var interactor: Interactor = App.instance.interactor
+class HomeFragmentViewModel : ViewModel(), KoinComponent {
+    val filmsListLiveData:  MutableLiveData<List<Film>> = MutableLiveData()
+    //Инициализируем интерактор
+    private val interactor: Interactor by inject()
 
     init {
         interactor.getFilmsFromApi(1, object : ApiCallback {
