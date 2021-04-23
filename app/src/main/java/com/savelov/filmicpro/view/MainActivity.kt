@@ -78,6 +78,12 @@ class MainActivity : AppCompatActivity() {
                     changeFragment(fragment ?: CollectionsFragment(), tag)
                     true
                 }
+                R.id.settings -> {
+                    val tag = "settings"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment( fragment?: SettingsFragment(), tag)
+                    true
+                }
                 else -> false
             }
         }

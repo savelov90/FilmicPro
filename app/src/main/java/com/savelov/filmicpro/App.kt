@@ -3,6 +3,9 @@ package com.savelov.filmicpro
 import android.app.Application
 import com.savelov.filmicpro.di.AppComponent
 import com.savelov.filmicpro.di.DaggerAppComponent
+import com.savelov.filmicpro.di.modules.DatabaseModule
+import com.savelov.filmicpro.di.modules.DomainModule
+import com.savelov.filmicpro.di.modules.RemoteModule
 
 
 class App : Application() {
@@ -12,7 +15,11 @@ class App : Application() {
         super.onCreate()
         instance = this
         //Создаем компонент
-        dagger = DaggerAppComponent.create()
+        dagger = DaggerAppComponent.builder()
+            .remoteModule(RemoteModule())
+            .databaseModule(DatabaseModule())
+            .domainModule(DomainModule(this))
+            .build()
     }
 
     companion object {
