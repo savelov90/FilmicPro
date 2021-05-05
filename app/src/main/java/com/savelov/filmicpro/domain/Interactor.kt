@@ -18,8 +18,13 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
     fun getFilmsFromApi(page: Int, callback: HomeFragmentViewModel.ApiCallback) {
         retrofitService.getFilms(getDefaultCategoryFromPreferences(), API.KEY, "ru-RU", page).enqueue(object : Callback<TmdbResultsDto> {
             override fun onResponse(call: Call<TmdbResultsDto>, response: Response<TmdbResultsDto>) {
-                //При успехе мы вызываем метод передаем onSuccess и в этот коллбэк список фильмов
-                callback.onSuccess(Converter.convertApiListToDtoList(response.body()?.tmdbFilms))
+                //При успехе мы вызываем метод, передаем onSuccess и в этот коллбэк список фильмов
+                val list = Converter.convertApiListToDtoList(response.body()?.tmdbFilms)
+                //Кладем фильмы в бд
+                list.forEach {
+                    repo.putToDb(film = it)
+                }
+                callback.onSuccess(list)
             }
 
             override fun onFailure(call: Call<TmdbResultsDto>, t: Throwable) {
@@ -35,4 +40,6 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
     }
     //Метод для получения настроек
     fun getDefaultCategoryFromPreferences() = preferences.getDefaultCategory()
+
+    fun getFilmsFromDB(): List<Film> = repo.getAllFromDB()
 }

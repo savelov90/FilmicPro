@@ -1,23 +1,49 @@
 package com.savelov.filmicpro.data
 
+import android.content.ContentValues
+import android.database.Cursor
 import com.savelov.filmicpro.R
+import com.savelov.filmicpro.data.db.DatabaseHelper
 import com.savelov.filmicpro.domain.Film
 
-class MainRepository {
-//    val filmsDataBase = listOf(
-//        Film("The Mandalorian",
-//            R.drawable.mando, "The travels of a lone bounty hunter in the outer reaches of the galaxy, far from the authority of the New Republic.", 7.7f),
-//        Film("The Boys", R.drawable.boys, "A group of vigilantes set out to take down corrupt superheroes who abuse their superpowers."),
-//        Film("Game of Thrones",
-//            R.drawable.game, "Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia.", 7.7f),
-//        Film("Better Call Saul",
-//            R.drawable.saul, "The trials and tribulations of criminal lawyer Jimmy McGill in the time before he established his strip-mall law office in Albuquerque, New Mexico.", 7.7f),
-//        Film("Breaking Bad ",
-//            R.drawable.bad, "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.", 7.7f),
-//        Film("Stranger Things",
-//            R.drawable.stranger, "When a young boy disappears, his mother, a police chief and his friends must confront terrifying supernatural forces in order to get him back.", 7.7f),
-//        Film("Sex Education",
-//            R.drawable.sex, "A teenage boy with a sex therapist mother teams up with a high school classmate to set up an underground sex therapy clinic at school.", 7.7f),
-//
-//        )
+class MainRepository(databaseHelper: DatabaseHelper) {
+    //Инициализируем объект для взаимодействия с БД
+    private val sqlDb = databaseHelper.readableDatabase
+    //Создаем курсор для обработки запросов из БД
+    private lateinit var cursor: Cursor
+
+    fun putToDb(film: Film) {
+        //Создаем объект, который будет хранить пары ключ-значение, для того
+        //чтобы класть нужные данные в нужные столбцы
+        val cv = ContentValues()
+        cv.apply {
+            put(DatabaseHelper.COLUMN_TITLE, film.title)
+            put(DatabaseHelper.COLUMN_POSTER, film.poster)
+            put(DatabaseHelper.COLUMN_DESCRIPTION, film.description)
+            put(DatabaseHelper.COLUMN_RATING, film.rating)
+        }
+        //Кладем фильм в БД
+        sqlDb.insert(DatabaseHelper.TABLE_NAME, null, cv)
+    }
+
+    fun getAllFromDB(): List<Film> {
+        //Создаем курсор на основании запроса "Получить все из таблицы"
+        cursor = sqlDb.rawQuery("SELECT * FROM ${DatabaseHelper.TABLE_NAME}", null)
+        //Сюда будем сохранять результат получения данных
+        val result = mutableListOf<Film>()
+        //Проверяем, есть ли хоть одна строка в ответе на запрос
+        if (cursor.moveToFirst()) {
+            //Итерируемся по таблице, пока есть записи, и создаем на основании объект Film
+            do {
+                val title = cursor.getString(1)
+                val poster = cursor.getString(2)
+                val description = cursor.getString(3)
+                val rating = cursor.getDouble(4)
+
+                result.add(Film(title, poster, description, rating))
+            } while (cursor.moveToNext())
+        }
+        //Возвращаем список фильмов
+        return result
+    }
 }
