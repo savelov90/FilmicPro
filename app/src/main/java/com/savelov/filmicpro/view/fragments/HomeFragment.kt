@@ -11,10 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.savelov.filmicpro.view.rv_adapters.FilmListRecyclerAdapter
 import com.savelov.filmicpro.view.MainActivity
-import com.savelov.filmicpro.R
 import com.savelov.filmicpro.view.rv_adapters.TopSpacingItemDecoration
 import com.savelov.filmicpro.databinding.FragmentHomeBinding
-import com.savelov.filmicpro.domain.Film
+import com.savelov.filmicpro.data.Entity.Film
 import com.savelov.filmicpro.utils.AnimationHelper
 import com.savelov.filmicpro.viewmodel.HomeFragmentViewModel
 import java.util.*

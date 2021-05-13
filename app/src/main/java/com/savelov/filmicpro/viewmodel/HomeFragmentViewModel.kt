@@ -3,10 +3,9 @@ package com.savelov.filmicpro.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.savelov.filmicpro.App
-import com.savelov.filmicpro.domain.Film
+import com.savelov.filmicpro.data.Entity.Film
 import com.savelov.filmicpro.domain.Interactor
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import java.util.concurrent.Executors
 import javax.inject.Inject
 
 class HomeFragmentViewModel : ViewModel() {
@@ -28,7 +27,9 @@ class HomeFragmentViewModel : ViewModel() {
             }
 
             override fun onFailure() {
-                filmsListLiveData.postValue(interactor.getFilmsFromDB())
+                Executors.newSingleThreadExecutor().execute {
+                    filmsListLiveData.postValue(interactor.getFilmsFromDB())
+                }
             }
         })
     }

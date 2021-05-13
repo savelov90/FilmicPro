@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.savelov.filmicpro.R
 import com.savelov.filmicpro.databinding.ActivityMainBinding
-import com.savelov.filmicpro.domain.Film
+import com.savelov.filmicpro.data.Entity.Film
 import com.savelov.filmicpro.view.fragments.*
 
 class MainActivity : AppCompatActivity() {

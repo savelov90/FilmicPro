@@ -2,6 +2,7 @@ package com.savelov.filmicpro.domain
 
 import com.savelov.filmicpro.data.API.API
 import com.savelov.filmicpro.data.API.TmdbApi
+import com.savelov.filmicpro.data.Entity.Film
 import com.savelov.filmicpro.data.Entity.TmdbResultsDto
 import com.savelov.filmicpro.data.MainRepository
 import com.savelov.filmicpro.data.settings.PreferenceProvider
@@ -22,7 +23,7 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
                 val list = Converter.convertApiListToDtoList(response.body()?.tmdbFilms)
                 //Кладем фильмы в бд
                 list.forEach {
-                    repo.putToDb(film = it)
+                    repo.putToDb(list)
                 }
                 callback.onSuccess(list)
             }

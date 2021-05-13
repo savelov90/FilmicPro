@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.savelov.filmicpro.R
 import com.savelov.filmicpro.data.API.ApiConstants
 import com.savelov.filmicpro.databinding.FragmentDetailsBinding
-import com.savelov.filmicpro.domain.Film
+import com.savelov.filmicpro.data.Entity.Film
 import kotlinx.android.synthetic.main.fragment_details.*
 
 
