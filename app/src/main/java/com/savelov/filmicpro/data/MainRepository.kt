@@ -2,6 +2,7 @@ package com.savelov.filmicpro.data
 
 import android.content.ContentValues
 import android.database.Cursor
+import androidx.lifecycle.LiveData
 import com.savelov.filmicpro.data.DAO.FilmDao
 import com.savelov.filmicpro.data.db.DatabaseHelper
 import com.savelov.filmicpro.data.Entity.Film
@@ -16,8 +17,7 @@ class MainRepository(private val filmDao: FilmDao) {
         }
     }
 
-    fun getAllFromDB(): List<Film> {
-        return filmDao.getCachedFilms()
-    }
+    fun getAllFromDB(): LiveData<List<Film>> = filmDao.getCachedFilms()
+
 }
 
