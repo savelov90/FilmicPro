@@ -6,34 +6,29 @@ import androidx.lifecycle.ViewModel
 import com.savelov.filmicpro.App
 import com.savelov.filmicpro.data.Entity.Film
 import com.savelov.filmicpro.domain.Interactor
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
 class HomeFragmentViewModel : ViewModel() {
 
-    val showProgressBar: MutableLiveData<Boolean> = MutableLiveData()
+    val showProgressBar: Channel<Boolean>
+
     //Инициализируем интерактор
     @Inject
     lateinit var interactor: Interactor
-    val filmsListLiveData: LiveData<List<Film>>
+    val filmsListData: Flow<List<Film>>
 
     init {
         App.instance.dagger.inject(this)
-        filmsListLiveData = interactor.getFilmsFromDB()
+        filmsListData = interactor.getFilmsFromDB()
+        showProgressBar = interactor.progressBarState
         getFilms()
     }
 
     fun getFilms() {
-        showProgressBar.postValue(true)
-        interactor.getFilmsFromApi(1, object : ApiCallback {
-            override fun onSuccess() {
-                showProgressBar.postValue(false)
-            }
-
-            override fun onFailure() {
-                showProgressBar.postValue(false)
-            }
-        })
+        interactor.getFilmsFromApi(1)
     }
 
 
