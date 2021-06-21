@@ -25,7 +25,6 @@ import com.savelov.filmicpro.databinding.FragmentDetailsBinding
 import com.savelov.filmicpro.data.Entity.Film
 import com.savelov.filmicpro.viewmodel.DetailsFragmentViewModel
 import com.savelov.filmicpro.viewmodel.HomeFragmentViewModel
-import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.coroutines.*
 
 
@@ -51,12 +50,12 @@ class DetailsFragment : Fragment() {
 
         setFilmsDetails()
 
-        details_fab_favorites.setOnClickListener {
+        binding.detailsFabFavorites.setOnClickListener {
             if (!film.isInFavorites) {
-                details_fab_favorites.setImageResource(R.drawable.ic_sharp_favorite_24)
+                binding.detailsFabFavorites.setImageResource(R.drawable.ic_sharp_favorite_24)
                 film.isInFavorites = true
             } else {
-                details_fab_favorites.setImageResource(R.drawable.ic_sharp_favorite_border_24)
+                binding.detailsFabFavorites.setImageResource(R.drawable.ic_sharp_favorite_border_24)
                 film.isInFavorites = false
             }
         }

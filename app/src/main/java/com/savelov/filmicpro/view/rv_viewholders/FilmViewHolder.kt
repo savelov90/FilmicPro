@@ -5,17 +5,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.savelov.filmicpro.data.API.ApiConstants
 import com.savelov.filmicpro.data.Entity.Film
-import kotlinx.android.synthetic.main.film_item.view.*
+import com.savelov.filmicpro.databinding.FilmItemBinding
 
 //В конструктор класс передается layout, который мы создали(film_item.xml)
 class FilmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    private val filmItemBinding = FilmItemBinding.bind(itemView)
     //Привязываем view из layout к переменным
-    private val title = itemView.title
-    private val poster = itemView.poster
-    private val description = itemView.description
+    private val title = filmItemBinding.title
+    private val poster = filmItemBinding.poster
+    private val description =  filmItemBinding.description
 
     //Вот здесь мы находим в верстке наш прогресс бар для рейтинга
-    private val ratingDonut = itemView.rating_donut
+    private val ratingDonut = filmItemBinding.ratingDonut
 
     //В этом методе кладем данные из film в наши view
     fun bind(film: Film) {

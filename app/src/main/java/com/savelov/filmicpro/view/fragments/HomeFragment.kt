@@ -17,6 +17,8 @@ import com.savelov.filmicpro.databinding.FragmentHomeBinding
 import com.savelov.filmicpro.data.Entity.Film
 import com.savelov.filmicpro.utils.AnimationHelper
 import com.savelov.filmicpro.viewmodel.HomeFragmentViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import java.util.*
@@ -25,7 +27,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
-    private lateinit var scope: CoroutineScope
+
 
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
@@ -52,7 +54,6 @@ class HomeFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        scope.cancel()
     }
 
 
@@ -68,24 +69,20 @@ class HomeFragment : Fragment() {
 
 
 
-        scope = CoroutineScope(Dispatchers.IO).also { scope ->
-            scope.launch {
-                viewModel.filmsListData.collect {
-                    withContext(Dispatchers.Main) {
-                        filmsAdapter.addItems(it)
-                        filmsDataBase = it
-                    }
-                }
+        viewModel.filmsListData
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { list ->
+                filmsAdapter.addItems(list)
+                filmsDataBase = list
             }
-        }
 
-        scope.launch {
-            for (element in viewModel.showProgressBar) {
-                launch(Dispatchers.Main) {
-                    binding.progressBar.isVisible = element
-                }
+        viewModel.showProgressBar
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                binding.progressBar.isVisible = it
             }
-        }
 
 
 
