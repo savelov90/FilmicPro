@@ -1,7 +1,7 @@
 package com.savelov.filmicpro.di.modules
 
 import android.content.Context
-import com.savelov.filmicpro.data.API.TmdbApi
+import com.example.remote_module.TmdbApi
 import com.savelov.filmicpro.data.MainRepository
 import com.savelov.filmicpro.data.settings.PreferenceProvider
 import com.savelov.filmicpro.domain.Interactor

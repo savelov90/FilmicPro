@@ -3,7 +3,7 @@ package com.savelov.filmicpro.view.rv_viewholders
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.savelov.filmicpro.data.API.ApiConstants
+import com.savelov.filmicpro.data.API.API
 import com.savelov.filmicpro.data.Entity.Film
 import com.savelov.filmicpro.databinding.FilmItemBinding
 
@@ -27,7 +27,7 @@ class FilmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         //Указываем контейнер, в которм будет "жить" наша картинка
         Glide.with(itemView)
             //Загружаем сам ресурс
-            .load(ApiConstants.IMAGES_URL + "w342" + film.poster)
+            .load(API.IMAGES_URL + "w342" + film.poster)
             //Центруем изображение
             .centerCrop()
             //Указываем ImageView, куда будем загружать изображение

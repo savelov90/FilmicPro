@@ -1,8 +1,6 @@
-package com.savelov.filmicpro.di.modules
+package com.example.remote_module
 
-import com.savelov.filmicpro.BuildConfig
-import com.savelov.filmicpro.data.API.ApiConstants
-import com.savelov.filmicpro.data.API.TmdbApi
+import com.example.remote_module.entity.ApiConstants
 import dagger.Module
 import dagger.Provides
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
@@ -12,6 +10,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+
 
 @Module
 class RemoteModule {
