@@ -1,16 +1,21 @@
 package com.savelov.filmicpro.view
 
 
+import android.content.BroadcastReceiver
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.savelov.filmicpro.R
 import com.savelov.filmicpro.databinding.ActivityMainBinding
 import com.savelov.filmicpro.data.Entity.Film
+import com.savelov.filmicpro.utils.ConnectionChecker
 import com.savelov.filmicpro.view.fragments.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var receiver: BroadcastReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +26,13 @@ class MainActivity : AppCompatActivity() {
 
         initNavigation()
 
+        receiver = ConnectionChecker()
+        val filters = IntentFilter().apply {
+            addAction(Intent.ACTION_POWER_CONNECTED)
+            addAction(Intent.ACTION_BATTERY_LOW)
+        }
+        registerReceiver(receiver, filters)
+
         //Зупускаем фрагмент при старте
         supportFragmentManager
             .beginTransaction()
@@ -28,6 +40,11 @@ class MainActivity : AppCompatActivity() {
             .addToBackStack(null)
             .commit()
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(receiver)
     }
 
     fun launchDetailsFragment(film: Film) {
