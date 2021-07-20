@@ -2,20 +2,16 @@ package com.savelov.filmicpro.domain
 
 
 import com.example.remote_module.TmdbApi
-import com.example.remote_module.entity.TmdbResults
 import com.savelov.filmicpro.data.API.API
 import com.savelov.filmicpro.data.Entity.Film
 import com.savelov.filmicpro.data.MainRepository
 import com.savelov.filmicpro.data.settings.PreferenceProvider
 import com.savelov.filmicpro.utils.Converter
-import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.BehaviorSubject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 
 class Interactor(private val repo: MainRepository, private val retrofitService: TmdbApi, private val preferences: PreferenceProvider) {
     var progressBarState: BehaviorSubject<Boolean> = BehaviorSubject.create()

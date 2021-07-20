@@ -23,6 +23,7 @@ import com.savelov.filmicpro.R
 import com.savelov.filmicpro.data.API.API
 import com.savelov.filmicpro.databinding.FragmentDetailsBinding
 import com.savelov.filmicpro.data.Entity.Film
+import com.savelov.filmicpro.view.notifications.NotificationHelper
 import com.savelov.filmicpro.viewmodel.DetailsFragmentViewModel
 import kotlinx.coroutines.*
 
@@ -57,6 +58,10 @@ class DetailsFragment : Fragment() {
                 binding.detailsFabFavorites.setImageResource(R.drawable.ic_sharp_favorite_border_24)
                 film.isInFavorites = false
             }
+        }
+
+        binding.detailsFabWatchLater.setOnClickListener {
+            NotificationHelper.createNotification(requireContext(), film)
         }
 
         binding.detailsFab.setOnClickListener {
