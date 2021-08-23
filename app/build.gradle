@@ -7,6 +7,22 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
+    flavorDimensions "version"
+
+
+    productFlavors {
+        basic {
+            dimension "version"
+            applicationIdSuffix ".basic"
+            versionNameSuffix "-basic"
+        }
+        pro {
+            dimension "version"
+            applicationIdSuffix ".pro"
+            versionNameSuffix "-pro"
+        }
+    }
+
 
     apply from: "$project.rootDir/versions.gradle"
 
@@ -38,6 +54,18 @@ android {
 
     buildFeatures {
         viewBinding true
+    }
+    sourceSets {
+        basic {
+            java {
+                srcDirs 'src\\basic\\java', 'src\\basic\\java\\2'
+            }
+        }
+        pro {
+            java {
+                srcDirs 'src\\pro\\java', 'src\\pro\\java\\2', 'src\\main\\java\\2'
+            }
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

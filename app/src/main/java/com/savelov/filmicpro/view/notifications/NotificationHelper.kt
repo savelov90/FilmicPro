@@ -14,7 +14,6 @@ import androidx.core.app.NotificationManagerCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.example.remote_module.entity.ApiConstants
 import com.savelov.filmicpro.R
 import com.savelov.filmicpro.data.API.API
 import com.savelov.filmicpro.data.Entity.Film
