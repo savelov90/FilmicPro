@@ -11,11 +11,14 @@ import com.savelov.filmicpro.di.DaggerAppComponent
 import com.savelov.filmicpro.di.modules.DatabaseModule
 import com.savelov.filmicpro.di.modules.DomainModule
 import com.savelov.filmicpro.view.notifications.NotificationConstants.CHANNEL_ID
+import kotlin.properties.Delegates
 
 
 class App : Application() {
     lateinit var dagger: AppComponent
     val remoteProvider = DaggerRemoteComponent.create()
+    var isPromoShown = false
+
 
     override fun onCreate() {
         super.onCreate()
